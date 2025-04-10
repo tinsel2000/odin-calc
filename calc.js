@@ -1,5 +1,6 @@
+// Calculator functions backend
 function add(number1, number2) {
-    return number1 + number2;
+    return parseFloat(number1) + parseFloat(number2);
 };
 
 function subtract(number1, number2) {
@@ -8,83 +9,120 @@ function subtract(number1, number2) {
 
 function multiply(number1, number2) {
     return number1 * number2;
-    console.log(number1 * number2);
 };
 
 function divide(number1, number2) {
     return number1 / number2;
 };
+function rounding(result1) { return Math.round(result1 * 100000) / 100000};
 
 function operate(number1, number2, operator1) {
     console.log(number1, number2, operator1);
     switch(operator1){
-        case 1:
+        case '+':
             return add(number1, number2);
-        case 2:
+        case "-":
             return subtract(number1, number2);
-        case 3:
+        case '*':
             return multiply(number1, number2);
-        case 4:
+        case '/':
             return divide(number1, number2);
-        default:
-            console.log(number1, number2, operator1);
     }
 };
 
-// console.log( operate(2, 4, 4) );
-/*
-const one = document.querySelector("#one");
-const results = document.getElementById('results');
-const allButtons = document.getElementsByClassName(".button")
-//const one = document.getElementsByClassName(".button")
+// Create calculator display and buttons
 
-const x = document.getElementsByClassName(".basicButtons")
 
-one.addEventListener("click", function (e) {
-    results.textContent = '1';
-    console.log(x.textContent);
+const nums = /\d|\./;
+const ops = /^(\+|-|\*|\/|%|\^|\(|\))$/;
+const sum = /=/;
 
-});
-*/
+const setButtonContent = "789/456*123-0.=+";
+const basicButtons = document.querySelector(".basicButtons");
+
+function makeButtons(b, class2) {
+    for (let i = 0; i < b.length; i++) {
+        const button = document.createElement("button")
+        button.setAttribute("id", b[i])
+        button.classList.add("button-19")
+        if (ops.test(b[i])) {
+            button.classList.add("button-op")
+        };
+        button.classList.add(class2)
+        button.textContent = b[i]
+        basicButtons.appendChild(button)
+    };
+};
+
+const setBigButtonContent = ['CE', 'AC']
+
+makeButtons(setButtonContent);
+makeButtons(setBigButtonContent);
+
+//  Calculator functions frontend
+
+function resetCalc(){
+num1 = '';
+num2 = '';
+op1 = '';
+dec1 = 0;
+};
+
+let num1 = '';
+let num2 = '';
+let op1 = '';
+let dec1 = 0;
+let inf = 2/0;
+
 
 function pointsq1(event) {
-    if (event.target.className !== 'button') {
-      return
-    }
-    //console.log(event.currentTarget.textContent)
-    //console.log(event.target.textContent)
-    const pressed = event.target.textContent
-    let strtest = typeof pressed;
-    console.log(strtest);
-    results.textContent = pressed;
+    const pressedButton = event.target.textContent
+    //    let strtest = typeof pressedButton;
+    //    console.log(strtest);
+    console.log(pressedButton);
 
-    const nums = /1/g;
-    const ops = /\-\+\*\//g;
-    const sum = /=/g;
-    if (nums.test(pressed)) {
-        return 1;
-        console.log("nums");
+    if (nums.test(pressedButton)) {
+        if (pressedButton === '.' && dec1 === 1){return};
+        results.textContent += pressedButton;
+        num2 += pressedButton;
+        if (pressedButton === '.') { dec1 = 1 };
     }
-    else if (pressed.matchAll(ops)) {
-        return 2;
-        console.log("ops");
+    else if (ops.test(pressedButton)) {
+        results.textContent += pressedButton;
+        if (!op1 && num2) {
+            op1 = pressedButton;
+            num1 = num2;
+            num2 = '';
+        }
+        else {
+            num2 += pressedButton
+        }
     }
-    else if (pressed.matchAll(sum)) {
-        return 3
-        console.log("sum");
+    else if (sum.test(pressedButton)) {
+        console.log(num1, num2, op1);
+        result1 = rounding(operate(parseFloat(num1), parseFloat(num2), op1));
+        if (!parseFloat(result1) || !parseInt(result1)) {
+            results.textContent = 'Error, deleting reality'
+            return
+        }
+        else {
+            results.textContent = result1
+            console.log(result1);
+            resetCalc();
+            num2 = result1; 
+            console.log(num1, "num2", num2, "op1", op1, "result1", result1);
+        };
+    }
+    else if (pressedButton === "AC") {
+        results.textContent = '';
+        resetCalc()
+    }
+    else if (pressedButton === "CE") {
+        results.textContent = results.textContent.slice(0, -1);
     };
-    switch(pressed){
-        //cases for num or
-        case 1:
-            console.log(pressed)
-        case 2:
-        case 3:
+};
 
-        default:
-            console.log("none");
-
-    }
-  }
-
-  const buttons = document.querySelector(".basicButtons");
-  buttons.addEventListener("click", pointsq1)
+const buttons = document.querySelector(".basicButtons");
+buttons.addEventListener("click", pointsq1)
+  
+const results = document.getElementById('results');

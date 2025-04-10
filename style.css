@@ -1,29 +1,54 @@
+.calculator {
+  display:flex;
+  flex-direction: column;
+  background-color: grey;
+  width: auto;
+  height: 600px;
+  border-style: solid;
+  border-radius: 15px;
+}
+
+
+h1 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size:xxx-large;
+  text-align: center;
+}
+
 .results {
-    display: flex;
-    justify-content: flex-end;
-    width: 45%;
-    border-style: solid;
-    padding: 10px;
-    font-size: 30px;
+  display: flex;
+  justify-content: flex-end;
+  width: 80%;
+  height: 30px;
+  border-style: solid;
+  border-radius: 15px;
+  border-color: black;
+  margin:auto;
+  padding: 10px;
+  font-size: 30px;
 }
 
 .basicButtons {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    padding: 10px;
-    width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin:auto;
+  margin-top: 10px;
+  width: 80%;
+  border-style: solid;
+  border-radius: 15px;
 }
 
 .basicButtons button{
-    width: 20%;
-    padding: 10px;
-    margin: 5px;
-    font-size: 30px;
+  width: 20%;
+  padding: 10px;
+  margin: 5px;
+  font-size: 30px;
+  text-align:center;
+  line-height: normal;
+  box-sizing: border-box;
 }
-
-<!-- HTML !-->
-<button class="button-19" role="button">Button 19</button>
 
 /* CSS */
 .button-19 {
@@ -89,4 +114,12 @@
 .button-19:active {
   border-width: 4px 0 0;
   background: none;
+}
+
+.button-op {
+  background-color: #e68f09;
+}
+
+.button-op:after {
+  background-color: #ff9f0a;
 }
