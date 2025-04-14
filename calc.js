@@ -37,7 +37,9 @@ const ops = /^(\+|-|\*|\/|%|\^|\(|\))$/;
 const sum = /=/;
 
 const setButtonContent = "789/456*123-0.=+";
+const setBigButtonContent = ['CE', 'AC']
 const basicButtons = document.querySelector(".basicButtons");
+
 
 function makeButtons(b, class2) {
     for (let i = 0; i < b.length; i++) {
@@ -52,8 +54,6 @@ function makeButtons(b, class2) {
         basicButtons.appendChild(button)
     };
 };
-
-const setBigButtonContent = ['CE', 'AC']
 
 makeButtons(setButtonContent);
 makeButtons(setBigButtonContent);
@@ -100,7 +100,9 @@ function pointsq1(event) {
         }
     }
     else if (sum.test(pressedButton)) {
-        result1 = rounding(operate(parseFloat(num1), parseFloat(num2), op1));
+        if ( num1 || num1 === 0 ) {
+            result1 = rounding(operate(parseFloat(num1), parseFloat(num2), op1));
+        } 
         console.log("num1:", num1, "num2:", num2, "op1:", op1, "result1:", result1);
         if ( Number.isNaN(result1) || result1 === 1/0 ) {
             results.textContent = 'Error, deleting reality'
@@ -110,7 +112,6 @@ function pointsq1(event) {
             results.textContent = result1
             resetCalc();
             num2 = result1;
-            console.log("num2 is now", num2)
         };
     }
     else if (pressedButton === "AC") {

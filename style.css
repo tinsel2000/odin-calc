@@ -1,7 +1,7 @@
 .calculator {
   display:flex;
   flex-direction: column;
-  background-color: grey;
+  background-color: rgb(230, 230, 230);
   width: auto;
   height: 600px;
   border-style: solid;
@@ -42,9 +42,10 @@ h1 {
 
 .basicButtons button{
   width: 20%;
-  padding: 10px;
+  height: 60px;
+  padding: 0px;
   margin: 5px;
-  font-size: 30px;
+  font-size: 28px;
   text-align:center;
   line-height: normal;
   box-sizing: border-box;
