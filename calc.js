@@ -41,7 +41,7 @@ const setBigButtonContent = ['CE', 'AC']
 const basicButtons = document.querySelector(".basicButtons");
 
 
-function makeButtons(b, class2) {
+function makeButtons(b) {
     for (let i = 0; i < b.length; i++) {
         const button = document.createElement("button")
         button.setAttribute("id", b[i])
@@ -49,7 +49,6 @@ function makeButtons(b, class2) {
         if (ops.test(b[i])) {
             button.classList.add("button-op")
         };
-        button.classList.add(class2)
         button.textContent = b[i]
         basicButtons.appendChild(button)
     };
@@ -75,6 +74,8 @@ let inf = 2/0;
 
 
 function pointsq1(event) {
+    if (!event.target.type) {return}
+    console.log(event.target.classList);
     const pressedButton = event.target.textContent
     //    let strtest = typeof pressedButton;
     //    console.log(strtest);
@@ -100,10 +101,10 @@ function pointsq1(event) {
         }
     }
     else if (sum.test(pressedButton)) {
+        console.log("num1:", num1, "num2:", num2, "op1:", op1, "result1:", result1);
         if ( num1 || num1 === 0 ) {
             result1 = rounding(operate(parseFloat(num1), parseFloat(num2), op1));
         } 
-        console.log("num1:", num1, "num2:", num2, "op1:", op1, "result1:", result1);
         if ( Number.isNaN(result1) || result1 === 1/0 ) {
             results.textContent = 'Error, deleting reality'
             return
