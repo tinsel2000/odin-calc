@@ -17,7 +17,6 @@ function divide(number1, number2) {
 function rounding(result1) { return Math.round(result1 * 100000) / 100000};
 
 function operate(number1, number2, operator1) {
-    console.log(number1, number2, operator1);
     switch(operator1){
         case '+':
             return add(number1, number2);
@@ -89,9 +88,11 @@ function pointsq1(event) {
     }
     else if (ops.test(pressedButton)) {
         results.textContent += pressedButton;
-        if (!op1 && num2) {
+        dec1 = 0;
+        if (!op1 && !Number.isNaN(num2)) {
             op1 = pressedButton;
             num1 = num2;
+            console.log("num1:", num1);
             num2 = '';
         }
         else {
@@ -99,18 +100,17 @@ function pointsq1(event) {
         }
     }
     else if (sum.test(pressedButton)) {
-        console.log(num1, num2, op1);
         result1 = rounding(operate(parseFloat(num1), parseFloat(num2), op1));
-        if (!parseFloat(result1) || !parseInt(result1)) {
+        console.log("num1:", num1, "num2:", num2, "op1:", op1, "result1:", result1);
+        if ( Number.isNaN(result1) || result1 === 1/0 ) {
             results.textContent = 'Error, deleting reality'
             return
         }
         else {
             results.textContent = result1
-            console.log(result1);
             resetCalc();
-            num2 = result1; 
-            console.log(num1, "num2", num2, "op1", op1, "result1", result1);
+            num2 = result1;
+            console.log("num2 is now", num2)
         };
     }
     else if (pressedButton === "AC") {
