@@ -77,8 +77,6 @@ function pointsq1(event) {
     if (!event.target.type) {return}
     console.log(event.target.classList);
     const pressedButton = event.target.textContent
-    //    let strtest = typeof pressedButton;
-    //    console.log(strtest);
     console.log(pressedButton);
 
     if (nums.test(pressedButton)) {
@@ -101,7 +99,6 @@ function pointsq1(event) {
         }
     }
     else if (sum.test(pressedButton)) {
-        console.log("num1:", num1, "num2:", num2, "op1:", op1, "result1:", result1);
         if ( num1 || num1 === 0 ) {
             result1 = rounding(operate(parseFloat(num1), parseFloat(num2), op1));
         } 
